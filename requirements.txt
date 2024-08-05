@@ -63,3 +63,5 @@ text2vec
 
 # agentica
 agentica
+
+markdownify
