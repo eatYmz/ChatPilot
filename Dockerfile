@@ -8,7 +8,7 @@ COPY . .
 RUN apt-get update && apt-get install -y procps && rm -rf /var/lib/apt/lists/*
 
 ENV ENV=prod
-ENV PORT ""
+ENV PORT "8181"
 
 ENV OLLAMA_BASE_URL ""
 ENV OPENAI_API_BASE_URLS ""
