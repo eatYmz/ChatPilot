@@ -5,7 +5,7 @@ WORKDIR /app
 COPY . .
 
 # 安装 procps 包含 ps 工具
-RUN apt-get update && apt-get install -y procps && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y nginx  procps && rm -rf /var/lib/apt/lists/*
 
 ENV ENV=prod
 ENV PORT "8181"
@@ -21,6 +21,9 @@ ENV DO_NOT_TRACK true
 
 # RAG Embedding Model Settings
 ENV RAG_EMBEDDING_MODEL="shibing624/text2vec-base-multilingual"
+
+# 复制 nginx 配置文件
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # 安装 gunicorn
 RUN pip3 install gunicorn
