@@ -20,5 +20,16 @@ if test "$WEBUI_SECRET_KEY $WEBUI_JWT_SECRET_KEY" = " "; then
 fi
 
 export WEBUI_SECRET_KEY="$WEBUI_SECRET_KEY"
+
+# 启动 nginx
+service nginx start
+
+# 确保 nginx 服务已启动
+if ! pgrep -x "nginx" > /dev/null
+then
+    echo "Nginx failed to start"
+    exit 1
+fi
+
 ps -ef | grep "chatpilot" | grep -v "grep" | awk '{print $2}' | xargs kill -9
 gunicorn -k uvicorn.workers.UvicornWorker chatpilot.server:app --bind 0.0.0.0:$PORT --forwarded-allow-ips '*' -w 2
